@@ -1,0 +1,117 @@
+<html>
+<head>
+    <title></title>
+    <!-- ideally at the bottom of the page -->
+    <!-- also works in the <head> -->
+    <script src="../alertify/lib/alertify.min.js"></script>
+    <link rel="stylesheet" href="../alertify/themes/alertify.core.css" />
+    <link rel="stylesheet" href="../alertify/themes/alertify.default.css" id="toggleCSS" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <!-- include the core styles -->
+   <!-- <link rel="stylesheet" href="PATH_TO_FILE/alertify.css" />-->
+    <!-- include a theme, can be included into the core instead of 2 separate files -->
+    <!--<link rel="stylesheet" href="PATH_TO_FILE/alertify.default.css" />-->
+
+    <script type="text/javascript">
+        function notificacion() {
+            alertify.log("Esto es una notificación cualquiera.");
+            return false;
+        }
+
+        $(document).ready(function(){
+            // ==============================
+            // Adaptar al español
+            // por defecto: OK, Cancel
+            alertify.set({
+                labels: {
+                    ok: "Aceptar",
+                    cancel: "Cancelar"
+                }
+            });
+            // ==============================
+            // Para nosotros es más natural primero aceptar y luego cancelar
+            // por defecto: Cancel, OK
+            alertify.set({ buttonReverse: true });
+            // ==============================
+            // Diálogo Básico
+            $("#alerta").click(function() {
+                alertify.alert("Se trata de un diálogo de alerta");
+            });
+
+            $("#confirmacion").click(function() {
+                alertify.confirm("Se trata de un diálogo de confirmación",
+                    function(e) {
+                        if (e) {
+                            alertify.success("Has pulsado <strong>"
+                                     + alertify.labels.ok
+                                     + "</strong>");
+                        } else {
+                            alertify.error("Has pulsado <strong>"
+                                     + alertify.labels.cancel
+                                     + "</strong>");
+                        }
+                    });
+            });
+
+            $("#prompt").click(function() {
+                alertify.prompt("Se trata de un diálogo con entrada de texto",
+                    function(e, str) {
+                        if (e) {
+                            alertify.success("Has pulsado <strong>"
+                                     + alertify.labels.ok
+                                     + "</strong> y escrito: "
+                                     + str);
+                        } else {
+                            alertify.error("Has pulsado <strong>"
+                                     + alertify.labels.cancel
+                                     + "</strong>");
+                        }
+                    }, "Valor predeterminado");
+            });
+
+            // Ejemplo de mensajes de Notificaciones
+            // Notificación Normal
+            $("#normal").click(function() {
+                alertify.log("Esto es una notificación cualquiera.");
+            });
+            // Notificación Exitosa
+            $("#correcta").click(function() {
+                alertify.success("Ha ocurrido éxitosamente el proceso.");
+            });
+            // Notificación de Error
+            $("#error").click(function() {
+                alertify.error("Ha ocurrido un error.");
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <input id="Button1" type="button" onclick="notificacion();" value="button" />
+
+
+
+    <h2>Ejemplo del Plugin Alertify.js</h2>
+    <h3>Diálogo Básico</h3>
+    <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" href="#" id="alerta">
+        <span class="ui-button-text">Alerta</span>
+    </button>
+    <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" href="#" id="confirmacion">
+        <span class="ui-button-text">Confirmación</span>
+    </button>
+    <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" href="#" id="prompt">
+        <span class="ui-button-text">Entrada de texto</span>
+    </button>
+    <h3>Mensaje de Notificaciones</h3>
+    <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" href="#" id="normal">
+        <span class="ui-button-text">Normal</span>
+    </button>
+    <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" href="#" id="correcta">
+        <span class="ui-button-text">Correcta</span>
+    </button>
+    <button class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" role="button" href="#" id="error">
+        <span class="ui-button-text">Error</span>
+    </button>
+</body>
+</html>
